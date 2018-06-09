@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到顶部</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 300%;
+            background: -webkit-linear-gradient(top,#9bff83 , #ff44b5 , #1600ff);
+            background: linear-gradient(top,#9bff83 , #ff44b5 , #1600ff);
+        }
+        #goLink{
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #6F7178;
+            border-radius: 40%;
+        }
+    </style>
+
+</head>
+<body>
+
+<!--
+ href="javascript: void 0"表示点击这个链接后执行一条JavaScript语句，
+ void：0这条语句什么也不做，是个空语句！
+-->
+<a id="goLink" href="javascript: void 0">TOP</a>
+<script src="回到顶部.js"></script>
+</body>
+</html>

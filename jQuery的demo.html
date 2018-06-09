@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQueryDemo</title>
+    <style type="text/css">
+        body, div, ul, li, h2 {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .menu {
+            margin: 50px auto;
+            width: 150px;
+            border: 1px solid #008000;
+            border-bottom: none;
+        }
+
+        .menu h2 {
+            padding: 0 10px;
+            height: 30px;
+            line-height: 30px;
+            background: #E0F2BE;
+            cursor: pointer;
+        }
+
+        .menu li {
+            border-bottom: 1px solid #008000;
+        }
+
+        .menuList {
+            display: none;
+            padding: 5px 0 5px 20px;
+            overflow: hidden;
+        }
+
+        .menuList li {
+            height: 25px;
+            line-height: 25px;
+            border-bottom: none;
+        }
+
+        .menuList.show {
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+<div class="menu" id="menu">
+    <ul id="menuUl">
+        <li>
+            <h2>衬衫1</h2>
+            <ul class="menuList" style="display: block;">
+                <li>短袖衬衫</li>
+                <li>长袖衬衫</li>
+                <li>男款衬衫</li>
+                <li>女款衬衫</li>
+            </ul>
+        </li>
+        <li>
+            <h2>衬衫2</h2>
+            <ul class="menuList">
+                <li>短袖衬衫</li>
+                <li>长袖衬衫</li>
+                <li>男款衬衫</li>
+                <li>女款衬衫</li>
+            </ul>
+        </li>
+        <li>
+            <h2>衬衫3</h2>
+            <ul class="menuList">
+                <li>短袖衬衫</li>
+                <li>长袖衬衫</li>
+                <li>男款衬衫</li>
+                <li>女款衬衫</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/tween.js"></script>
+<script type="text/javascript">
+    var menuUl = document.getElementById("menuUl"),
+        h2List = menuUl.getElementsByTagName("h2"),
+        innerUl = menuUl.getElementsByTagName("ul");
+
+    function up(n) {
+        for (var i = 0, len = innerUl.length; i < len; i++) {
+            if (innerUl[i].style.display == "none") {
+                innerUl[i].style.display = "block";
+                innerUl[i].siblings.style.display = "none";
+            } else {
+                innerUl[i].style.display = "none";
+                innerUl[i].siblings.style.display = "block";
+            }
+
+        }
+
+    }
+
+    for (var i = 0, len = h2List.length; i < len; i++) {
+        ~function (i) {
+            h2List[i].onclick = function () {
+                up(i);
+            }
+        }(i);
+
+    }
+
+
+</script>
+</body>
+</html>

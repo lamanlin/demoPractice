@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+            border: none;
+        }
+
+        .original-pic {
+            position: absolute;
+            top: 150px;
+            left: 250px;
+            width: 350px;
+            height: 350px;
+            box-shadow: 4px 4px 10px 0 #616161;
+        }
+
+        .original-pic img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mark {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 175px;
+            height: 175px;
+            background-color: #000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            cursor: move;
+        }
+
+        .big-pic {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 900px;
+            width: 350px;
+            height: 350px;
+            box-shadow: 4px 4px 10px 0 #616161;
+            overflow: hidden;
+        }
+
+        .big-pic img {
+            width: 200%;
+            height: 200%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="original-pic" id="originalPic">
+    <img src="img/iphone.jpg">
+    <div class="mark" id="mark"></div>
+</div>
+<div class="big-pic" id="bigPic">
+    <img src="img/iphone_big.jpg">
+</div>
+
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    var box = document.getElementById("originalPic"),
+        mark = document.getElementById("mark"),
+        bigPic = document.getElementById("bigPic"),
+        boxImg = bigPic.getElementsByTagName("img")[0];
+
+    //计算位置
+    function computedMarkPos(e) {
+        e = e || window.event;
+        var curLeft = e.clientX - box.offsetLeft - mark.offsetWidth / 2,
+            curTop = e.clientY - box.offsetTop - mark.offsetHeight / 2;
+        //边界处理
+        var minLeft = 0, maxLeft = box.offsetWidth - mark.offsetWidth;
+        var minTop = 0, maxTop = box.offsetHeight - mark.offsetHeight;
+        curLeft = curLeft <= minLeft ? minLeft : (curLeft >= maxLeft ? maxLeft : curLeft);
+        curTop = curTop <= minTop ? minTop : (curTop >= maxTop ? maxTop : curTop);
+        utils.css(mark, {
+            left: curLeft,
+            top: curTop
+        });
+        utils.css(boxImg, {
+            marginLeft: -curLeft * 2,
+            marginTop: -curTop * 2
+        });
+    }
+
+    box.onmouseenter = function (e) {
+        utils.css(mark, "display", "block");
+        utils.css(bigPic, "display", "block");
+        computedMarkPos(e);
+    };
+    mark.onmousemove = computedMarkPos;
+    box.onmouseleave = function (e) {
+        utils.css(mark, "display", "none");
+        utils.css(bigPic, "display", "none");
+    }
+</script>
+</body>
+</html>

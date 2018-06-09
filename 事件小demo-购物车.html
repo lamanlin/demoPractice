@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+        }
+
+        .outer {
+            margin: 100px auto;
+            width: 500px;
+        }
+
+        .shopping-cart {
+            position: relative;
+            top: 1px;
+            width: 200px;
+            height: 35px;
+            border: 1px solid #CCCCFF;
+            text-align: center;
+            line-height: 35px;
+        }
+
+        .con {
+            width: 350px;
+            height: 100px;
+            border: 1px solid #CCCCFF;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .bg {
+            border-bottom-color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<div class="shopping-cart" id="shopping-cart">购物车</div>
+<div class="con" id="con">车内列表</div>
+</body>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    var shoppingCart = document.getElementById("shopping-cart"),
+        con = document.getElementById("con");
+
+    con.onmouseover = function (e) {
+        e = e || window.event;
+        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+    };
+
+
+    document.body.onmouseover = function (e) {
+        e = e || window.event;
+        var curT = e.target || e.srcElement;
+        if (curT.id === "shopping-cart") {
+            utils.addClass(curT, "bg");
+            utils.css(con, "display", "block");
+            return;
+        }
+        utils.removeClass(shoppingCart, "bg");
+        utils.css(con, "display", "none");
+    }
+</script>
+</html>

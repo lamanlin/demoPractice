@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM2事件</title>
+</head>
+<body>
+<div id="box" style="width: 100px;height: 100px;background: red"></div>
+
+
+<script charset="UTF-8" src="js/event.js"></script>
+<script>
+    var box = document.getElementById("box");
+
+    var count = 0;
+
+    function fn1() {
+        console.log(1);
+    }
+
+    function fn2() {
+        console.log(2);
+    }
+
+    function fn3() {
+        console.log(3);
+    }
+
+    function fn4() {
+        console.log(4);
+        personalEvent.off(box, "click", fn1);
+        personalEvent.off(box, "click", fn2);
+        personalEvent.off(box, "click", fn3);
+        personalEvent.off(box, "click", fn4);
+    }
+
+    function fn5() {
+        console.log(5);
+    }
+
+    function fn6() {
+        console.log(6);
+    }
+
+    function fn7() {
+        console.log(7);
+    }
+
+    function fn8() {
+        console.log(8);
+    }
+
+    function fn9() {
+        console.log(9);
+    }
+
+    function fn10() {
+        console.log(10);
+    }
+
+    function fn11() {
+        console.log(11);
+    }
+
+    function fn12() {
+        console.log(12);
+    }
+
+    personalEvent.on(box, "click", fn1);
+    personalEvent.on(box, "click", fn2);
+    personalEvent.on(box, "click", fn3);
+    personalEvent.on(box, "click", fn4);
+    personalEvent.on(box, "click", fn5);
+    personalEvent.on(box, "click", fn6);
+    personalEvent.on(box, "click", fn7);
+    personalEvent.on(box, "click", fn8);
+    personalEvent.on(box, "click", fn9);
+    personalEvent.on(box, "click", fn10);
+    personalEvent.on(box, "click", fn11);
+    personalEvent.on(box, "click", fn12);
+
+
+</script>
+</body>
+</html>

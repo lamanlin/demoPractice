@@ -1,0 +1,43 @@
+body{
+    padding:0;
+    margin:0;
+}
+
+.tabBox{
+    margin: 40px auto;
+    width: 500px;
+}
+.tabBox ul{
+    position: relative;
+    top: 1px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.tabBox ul li{
+    float: left;
+    width: 80px;
+    height: 52px;
+    border: 1px solid #abee6b;
+    margin-right: 20px;
+    text-align: center;
+    line-height: 52px;
+    cursor: pointer;
+}
+.tabBox ul .select{
+    background-color: #eeeb77;
+    border-bottom: 1px solid #eeeb77;
+}
+.tabBox div{
+    width: 386px;
+    height: 230px;
+    line-height: 230px;
+    text-align: center;
+    border: 1px solid #abee6b;
+    display: none;
+}
+.tabBox .select{
+    display: block;
+    background-color: #eeeb77;
+}

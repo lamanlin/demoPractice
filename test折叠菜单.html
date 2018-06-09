@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        <!--
+        *{margin:0;padding:0;list-style:none;font-size:14px}
+        #nav{margin:10px;text-align:center;line-height:25px;width:200px;}
+        .title{background:#336699;color:#fff;border-bottom:1px solid #fff;cursor:pointer;}
+        .title1{background:#888;color:#000;border-bottom:1px solid #666;cursor:pointer;}
+        .content li{color:#336699;background:#ddd;border-bottom:1px solid #fff;}
+        -->
+    </style>
+</head>
+<body>
+<div id="nav">
+    <div class="title" id="menu1" onclick="showmenu('1') ">Ajax下载</div>
+    <div id="list1" class="content" style="display:none">
+        <ul>
+            <li>jQuery</li>
+            <li>Extjs</li>
+            <li>Mootools</li>
+        </ul>
+    </div>
+    <div class="title" id="menu2" onclick="showmenu('2')">网页代码</div>
+    <div id="list2" class="content" style="display:none">
+        <ul>
+            <li>菜单导航</li>
+            <li>层和布局</li>
+            <li>图片切换</li>
+        </ul>
+    </div>
+</div>
+
+
+<script language = JavaScript>
+    function showmenu(id) {
+        var list = document.getElementById("list"+id);
+        var menu = document.getElementById("menu"+id)
+        if (list.style.display=="none") {
+            document.getElementById("list"+id).style.display="block";
+            menu.className = "title1";
+        }else {
+            document.getElementById("list"+id).style.display="none";
+            menu.className = "title";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运动</title>
+    <style type="text/css">
+        #box {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            width: 100px;
+            height: 100px;
+            background-color: #cc8a9c;
+        }
+
+        .btn {
+            position: absolute;
+            top: 100px;
+            left: 400px;
+        }
+
+        .btn input {
+            display: inline-block;
+            margin-right: 10px;
+            outline: none;
+            width: 70px;
+            height: 40px;
+            border: 1px solid lawngreen;
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+<body>
+<div id="box"></div>
+<!--<div class="btn">
+    <input type="button" value="左移动" id="btnLeft">
+    <input type="button" value="右移动" id="btnRight">
+</div>-->
+<script type="text/javascript" src="js/utils.js"></script>
+<script src="js/tween.js"></script>
+<script type="text/javascript">
+    var oBox = document.getElementById("box");
+    zhufengAnimate(oBox, {
+            left: 1000,
+            top: 500
+        },
+        1000,
+        function () {
+            //this->oBox
+            utils.css(this, "background", "red");
+        });
+
+
+    //->实现一个匀速运动,在指定时间内完成动画:计算出总距离\总时间,根据总距离和总时间求出对应的步长(每10ms走一步的话需要走多远)
+    //->设置一个定时器,让元素每一次都在当前的基础上累加步长即可
+    /* var duration = 2000;
+     var maxLeft = utils.win("clientWidth") - oBox.offsetWidth;
+     var step = (maxLeft / duration) * 10;
+     var timer = window.setInterval(function () {
+         var curLeft = utils.css(oBox, "left");
+         if (curLeft >= maxLeft) {
+             window.clearInterval(timer);
+             return;
+         }
+         curLeft += step;
+         utils.css(oBox, "left", curLeft);
+     }, 10);*/
+
+    //->实现一个匀速运动,在指定时间内完成动画:自己写一个动画公式,
+    // 根据当前走的时间t、总时间d、起始位置b、总距离c,计算出我们当前元素应该在的位置,让当前的元素运动到这个位置即可
+    /* function linear(t, b, c, d) {
+         return t / d * c + b;
+     }
+
+     var oBox = document.getElementById("box");
+     var beginLeft = utils.css(oBox, "left"), beginTop = utils.css(oBox, "top"),
+         targetLeft = 1000, targetTop = 500;
+     var time = null, duration = 2000, changeLeft = targetLeft - beginLeft, changeTop = targetTop - beginTop;
+     var timer = window.setInterval(function () {
+         time += 10;
+         if (time >= duration) {
+             utils.css(oBox, {
+                 left: targetLeft,
+                 top: targetTop
+             });
+             window.clearInterval(timer);
+             return;
+         }
+         var curLeft = linear(time, beginLeft, changeLeft, duration);
+         var curTop = linear(time, beginTop, changeTop, duration);
+         utils.css(oBox, "left", curLeft);
+         utils.css(oBox, "top", curTop);
+     }, 10);*/
+    //不设定时间的运动
+    //->问题：当总距离/我们设定的步长=不是一个整数 ->我少走一步的话还差点在到目标位置，多走一步的话会超出目标的位置
+    //->在进行边界判断的时候加上步长来进行处理
+    /*var oBox = document.getElementById("box");
+    var btn=
+    var step = 5, maxLeft = utils.win("clientWidth") - oBox.offsetWidth;
+    var timer = window.setInterval(function () {
+        var curLeft = utils.css(oBox, "left");
+        if (curLeft + step >= maxLeft) {
+            utils.css(oBox, "left", maxLeft);
+            window.clearInterval(timer);
+            return;
+        }
+        curLeft += step;
+        utils.css(oBox, "left", curLeft);
+    }, 10);*/
+
+    /*var oBox = document.getElementById("box");
+    var minLeft = 0, maxLeft = utils.win("clientWidth") - oBox.offsetWidth;
+
+    function move(target) {
+        //->为了让当前的元素在同一个时间只运行一个动画(下一个动画开始的时候首先把上一个动画的定时器清除掉):
+        // 保证当前元素所有动画接收定时器返回值的那个变量需要共享(把这个值放在当前元素的自定义属性上)
+        _move();
+        function _move() {
+            window.clearTimeout(oBox.timer);
+            var curLeft = utils.css(oBox, "left");
+            if (curLeft < target) {
+                if (curLeft + 5 >= target) {
+                    utils.css(oBox, "left", target);
+                    return;
+                }
+                curLeft += 5;
+                utils.css(oBox, "left", curLeft);
+            } else if (curLeft > target) {
+                if (curLeft - 5 <= target) {
+                    utils.css(oBox, "left", target);
+                    return;
+                }
+                curLeft -= 5;
+                utils.css(oBox, "left", curLeft);
+            } else {
+                return;
+            }
+            oBox.timer = window.setTimeout(_move, 10);
+        }
+
+    }
+    document.getElementById("btnLeft").onclick = function () {
+        move(minLeft);
+    };
+    document.getElementById("btnRight").onclick = function () {
+        move(maxLeft);
+    };*/
+
+
+
+
+        function Linear(t, b, c, d) {
+            return c * t / d + b;
+        }
+        var beginLeft = utils.css(oBox, "left"), beginTop = utils.css(oBox, "top");
+        var targetLeft = 1000, targetTop = 500;
+        var changeLeft = targetLeft - beginLeft, changeTop = targetTop - beginTop;
+        var duration = 1000, time = 0;
+
+        oBox.timer = window.setInterval(function () {
+            time += 10;
+            if (time >= duration) {
+                utils.css(oBox, {
+                    left: targetLeft,
+                    top: targetTop
+                });
+                window.clearInterval(oBox.timer);
+                return;
+            }
+            var curLeft = Linear(time, beginLeft, changeLeft, duration);
+            var curTop = Linear(time, beginTop, changeTop, duration);
+            utils.css(oBox, {
+                left: curLeft,
+                top: curTop
+            });
+        }, 10);
+</script>
+</body>
+</html>

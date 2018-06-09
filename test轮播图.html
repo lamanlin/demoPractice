@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<script src="js/jquery.min.js"></script>
+<style>
+    *{margin: 0; padding: 0;}
+
+    img{
+        border:0;
+    }
+
+    #container{
+        width:800px;
+        height: 130px;
+        <span style="white-space:pre">  </span>margin:100px auto;
+        border:3px solid blue;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #container ul{
+        list-style: none;
+        width:10000px;
+        position: absolute;
+    }
+
+    #container ul li{
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+<body>
+
+<div id="container">
+    <ul id="content">
+        <li><a href="#"><img src="img/banner1.jpg"/></a></li>
+        <li><a href="#"><img src="img/banner2.jpg"/></a></li>
+        <li><a href="#"><img src="img/banner3.jpg"/></a></li>
+        <li><a href="#"><img src="img/banner1.jpg"/></a></li>
+        <li><a href="#"><img src="img/banner2.jpg""/></a></li>
+        <li><a href="#"><img src="img/banner3.jpg""/></a></li>
+        <li><a href="#"><img src="img/banner4.jpg""/></a></li>
+    </ul>
+</div>
+</div>
+<script charset="UTF-8" type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    /* window.onload比 $(function(){}) 加载的更晚一些，这样那些宽度的计算在Chrome中就可以准确计算了*/
+    window.onload = function(){
+
+        /*计算一个segment的宽度*/
+
+        var segmentWidth = 0;
+        $("#container #content li").each(function(){
+            segmentWidth+= $(this).outerWidth(true);
+        });
+
+        $("#container #content li").clone().appendTo($("#container #content"));
+
+        run(6000);
+
+        function run(interval){
+            $("#container #content").animate({"left":-segmentWidth}, interval,"linear",function(){
+                $("#container #content").css("left",0);
+                run(6000);
+            });
+        }
+
+        $("#container").mouseenter(function(){
+            $("#container #content").stop();
+        }).mouseleave(function(){
+            var passedCourse = -parseInt($("#container #content").css("left"));
+            var time = 6000 * (1 - passedCourse/segmentWidth);
+            run(time);
+        });
+    };
+
+</script>
+</body>
+</html>

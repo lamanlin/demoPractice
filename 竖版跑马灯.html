@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跑马灯作业</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+        }
+
+        #box {
+            margin: 100px auto;
+            border: 5px solid #CCCCFF;
+            width: 350px;
+            height: 307px;
+        }
+
+        #wrap-box {
+            overflow: hidden;
+            height: 307px;
+        }
+
+        img {
+            width: 55px;
+            height: 55px;
+        }
+
+        #wrap-box ul {
+            list-style: none;
+
+        }
+
+        #wrap-box ul li {
+            width: 350px;
+            height: 100px;
+            border-bottom: 2px dashed #6F7178;
+        }
+
+        #wrap-box ul li p {
+            display: inline-block;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="wrap-box">
+        <ul id="conBegin">
+            <li>
+                <img src="images/pic1.jpg">
+                <p>我支持华流文化有限公司，我相信他们会赢!</p>
+            </li>
+            <li>
+                <img src="images/head.jpg">
+                <p>我支持华流文化有限公司，我相信他们会赢!</p>
+            </li>
+            <li>
+                <img src="images/head.jpg">
+                <p>我相信他们会赢#我的第六感一向很强！！！</p>
+            </li>
+        </ul>
+        <ul id="centerBegin">
+            <li>
+                <img src="images/pic1.jpg">
+                <p>我支持华流文化有限公司，我相信他们会赢!</p>
+            </li>
+            <li>
+                <img src="images/head.jpg">
+                <p>我支持华流文化有限公司，我相信他们会赢!</p>
+            </li>
+            <li>
+                <img src="images/head.jpg">
+                <p>我相信他们会赢#我的第六感一向很强！！！</p>
+            </li>
+        </ul>
+        <ul id="endBegin">
+            <li>
+                <img src="images/pic1.jpg">
+                <p>我支持华流文化有限公司，我相信他们会赢!</p>
+            </li>
+            <li>
+                <img src="images/head.jpg">
+                <p>我支持华流文化有限公司，我相信他们会赢!</p>
+            </li>
+            <li>
+                <img src="images/head.jpg">
+                <p>我相信他们会赢#我的第六感一向很强！！！</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    //获取HTML页面上的元素
+    var box = document.getElementById("box"),
+        wrap = document.getElementById("wrap-box"),
+        conBegin = document.getElementById("conBegin");
+    //获取height
+    var conBegin_height = getCss(conBegin, "height");
+    console.log(conBegin_height);
+
+    //新建一个方法move，当滚动距离超过height时，让滚动距离复原
+    function move() {
+        wrap.scrollTop++;console.log(wrap.scrollTop);
+        if (wrap.scrollTop >= conBegin_height) {
+
+            wrap.scrollTop = 0;
+        }
+    }
+
+    //设定一个定时器，10ms ；当鼠标移动上去时，停止/移开运行
+    var timer = window.setInterval(move, 10);
+    box.onmouseover = function () {
+        window.clearInterval(timer);
+    };
+    box.onmouseout = function () {
+        timer = window.setInterval(move, 10);
+    };
+
+
+
+    //新建一个获取元素getCss的方法
+    function getCss(curEle, attr) {
+        var val = null;
+        var reg = null;
+        if ("getComputedStyle" in window) {
+            val = window.getComputedStyle(curEle, null)[attr];
+        }
+        else {
+            val = curEle.currentStyle(curEle, null)[attr];
+        }
+        reg = /^(-?\d+(\.\d+)?)(rem|px|em|pt)$/;
+        return reg.test(val) ? parseFloat(val) : val;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+*{
+    margin:0;
+    padding: 0;
+    -webkit-user-select: none;
+}
+ul,li{
+    list-style: none;
+}
+.box{
+    margin: 10px;
+    padding:10px;
+    width: 300px;
+    border: 1px dashed #ee3833;
+    background-color: #ee6269;
+    color: #e1e1e1;
+}
+.box li{
+    position: relative;
+    line-height: 30px;
+}
+.box li.one{
+    margin-left: 20px;
+}
+.box li.two{
+    margin-left: 40px;
+}
+.box li.three{
+    margin-left: 60px;
+}
+.box li.one ul,.box li.two ul,.box li.three ul{
+    display: none;
+}
+.box span{
+    display: block;
+    margin-left: 30px;
+}
+.box em{
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    background: url("../img/icon.png") no-repeat -59px -28px;
+    cursor: pointer;
+}
+.box em.bg{
+    background: url("../img/icon.png") no-repeat -42px -28px;
+}

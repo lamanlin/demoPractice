@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐隐渐现jQuery轮播图</title>
+    <link rel="stylesheet" href="css/渐隐渐现-jQuery版.css">
+
+
+</head>
+<body>
+<div class="banner" id="bannerOne">
+    <div class="img-box"></div>
+    <ul class="banner-tip"></ul>
+    <a href="javascript:;" class="banner-left"></a>
+    <a href="javascript:;" class="banner-right"></a>
+</div>
+
+
+
+<script charset="UTF-8" src="js/jquery-3.3.1.min.js"></script>
+<script charset="UTF-8" src="js/bannerPlugin.js"></script>
+<script>
+    $("#bannerOne").layerSlider("json/banner.txt",3000);
+</script>
+</body>
+</html>
